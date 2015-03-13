@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,12 +24,21 @@ import java.util.ArrayList;
 /**
  * Sunshine ForecastFragment
  */
-public class ForecastFragment extends Fragment {
+public class ForecastFragment extends Fragment
+{
+
+    private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
     public ForecastFragment() {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -44,11 +56,31 @@ public class ForecastFragment extends Fragment {
                 forecasts);
         ListView forecastLV = (ListView)rootView.findViewById(R.id.listview_forecast);
         forecastLV.setAdapter(forecastAdapter);
+
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.forecastfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_refresh)
+        {
+            Log.d(LOG_TAG, "action_refresh selected");
+            new FetchWeatherTask().execute();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     class FetchWeatherTask extends AsyncTask<Void, Void, String>
     {
+        private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+
         @Override
         protected String doInBackground(Void... parms)
         {
@@ -92,6 +124,7 @@ public class ForecastFragment extends Fragment {
                     return null;
                 }
                 forecastJSON = buffer.toString();
+                Log.d(LOG_TAG, forecastJSON);
             }
             catch (IOException e)
             {
