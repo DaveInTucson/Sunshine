@@ -28,7 +28,8 @@ public class ForecastFragment extends Fragment
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
-    public ForecastFragment() {
+    public ForecastFragment()
+    {
     }
 
     @Override
@@ -86,7 +87,7 @@ public class ForecastFragment extends Fragment
         {
             if (ENABLE_LOG_VERBOSE) Log.v(LOG_TAG, message);
         }
-        
+
         @Override
         protected String[] doInBackground(String... locations)
         {
@@ -97,23 +98,22 @@ public class ForecastFragment extends Fragment
             {
                 final int numDays = 7;
                 String location = locations[0];
-                String forecastURL = OpenWeatherMapManager.makeGetForecastUrl(location, numDays);
+                String getForecastURL = OpenWeatherMapManager.makeGetForecastUrl(location, numDays);
                 log_verbose("Fetching forecast JSON");
-                String forecastJSON = Http.readDataFromUrl(forecastURL);
+                String forecastJSON = Http.readDataFromUrl(getForecastURL);
 
-                if (null != forecastJSON)
+                if (null == forecastJSON) return null;
+
+                log_verbose("have response, parsing");
+                try
                 {
-                    log_verbose("have response, parsing");
-                    try
-                    {
-                        String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, numDays);
-                        log_verbose("JSON parse succeeded");
-                        return forecasts;
-                    }
-                    catch (Exception e)
-                    {
-                        Log.e(LOG_TAG, "Failed to parse JSON: ", e);
-                    }
+                    String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, numDays);
+                    log_verbose("JSON parse succeeded");
+                    return forecasts;
+                }
+                catch (Exception e)
+                {
+                    Log.e(LOG_TAG, "Failed to parse JSON: ", e);
                 }
             }
             catch (IOException e)
