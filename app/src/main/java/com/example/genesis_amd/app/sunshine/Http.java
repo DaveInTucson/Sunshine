@@ -25,7 +25,7 @@ public class Http
     private static HttpURLConnection sendGetRequest(URL url) throws IOException
     {
         log_verbose("opening connection");
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
         log_verbose("sending GET request...");
@@ -54,8 +54,7 @@ public class Http
             }
 
             return buffer.toString();
-        }
-        finally
+        } finally
         {
             if (null != reader)
                 reader.close();
@@ -72,8 +71,7 @@ public class Http
             connection = sendGetRequest(url);
             log_verbose("reading response");
             return readRequestResponse(connection);
-        }
-        finally
+        } finally
         {
             if (null != connection)
             {
@@ -81,5 +79,10 @@ public class Http
                 connection.disconnect();
             }
         }
+    }
+
+    public static String readDataFromUrl(String urlString) throws IOException
+    {
+        return readDataFromUrl(new URL(urlString));
     }
 }
