@@ -121,7 +121,7 @@ public class ForecastFragment extends Fragment
                 Log.e(LOG_TAG, "exception in doInBackground: ", e);
             }
 
-            Log.v(LOG_TAG, "reached return null");
+            log_verbose("reached return null");
             return null;
         }
     }
