@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.genesis_amd.app.sunshine.Http;
+import com.example.genesis_amd.app.sunshine.OpenWeatherMapManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -78,26 +79,6 @@ public class ForecastFragment extends Fragment
 
     class FetchWeatherTask extends AsyncTask<String, Void, String>
     {
-        private final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
-        private final String QUERY_PARAM  = "q";
-        private final String FORMAT_PARAM = "mode";
-        private final String UNITS_PARAM  = "units";
-        private final String DAYS_PARAM   = "cnt";
-
-        private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
-
-        private URL makeOpenWeatherURL(String location) throws IOException
-        {
-            Uri.Builder builder = Uri.parse(FORECAST_BASE_URL).buildUpon();
-            builder.appendQueryParameter(QUERY_PARAM, location);
-            builder.appendQueryParameter(FORMAT_PARAM, "json");
-            builder.appendQueryParameter(UNITS_PARAM , "metric");
-            builder.appendQueryParameter(DAYS_PARAM  , "7");
-            Uri uri = builder.build();
-            Log.v(LOG_TAG, "Built URI " + uri.toString());
-            return new URL(uri.toString());
-        }
-
         @Override
         protected String doInBackground(String... locations)
         {
@@ -107,8 +88,9 @@ public class ForecastFragment extends Fragment
             try
             {
                 String location = locations[0];
+                String forecastURL = OpenWeatherMapManager.makeGetForecastUrl(location);
                 Log.v(LOG_TAG, "Fetching forecast JSON");
-                String forecastJSON = Http.readDataFromUrl(makeOpenWeatherURL(location));
+                String forecastJSON = Http.readDataFromUrl(forecastURL);
 
                 Log.d(LOG_TAG, "have response=" + forecastJSON);
                 return forecastJSON;
