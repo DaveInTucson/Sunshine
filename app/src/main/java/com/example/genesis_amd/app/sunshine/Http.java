@@ -15,16 +15,22 @@ import java.net.URL;
 public class Http
 {
     private static final String LOG_TAG = Http.class.getSimpleName();
+    private static final boolean ENABLE_VERBOSE_LOGGING = false;
+
+    private static void log_verbose(String message)
+    {
+        if (ENABLE_VERBOSE_LOGGING) Log.v(LOG_TAG, message);
+    }
 
     private static HttpURLConnection sendGetRequest(URL url) throws IOException
     {
-        Log.v(LOG_TAG, "opening connection");
+        log_verbose("opening connection");
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
 
-        Log.v(LOG_TAG, "sending GET request...");
+        log_verbose("sending GET request...");
         connection.connect();
-        Log.v(LOG_TAG, "returning connection");
+        log_verbose("returning connection");
         return connection;
 
     }
@@ -45,13 +51,6 @@ public class Http
             while ((line = reader.readLine()) != null)
             {
                 buffer.append(line);
-                Log.v(LOG_TAG, "read line " + line);
-            }
-
-            if (buffer.length() == 0)
-            {
-                Log.v(LOG_TAG, "read buffer is empty!");
-                return null;
             }
 
             return buffer.toString();
@@ -66,21 +65,20 @@ public class Http
 
     public static String readDataFromUrl(URL url) throws IOException
     {
-        Log.v(LOG_TAG, "opening Url");
+        log_verbose("opening Url");
         HttpURLConnection connection = null;
         try
         {
             connection = sendGetRequest(url);
-            Log.v(LOG_TAG, "reading response");
+            log_verbose("reading response");
             return readRequestResponse(connection);
         }
         finally
         {
             if (null != connection)
             {
-                Log.v(LOG_TAG, "disconnecting");
+                log_verbose("disconnecting");
                 connection.disconnect();
-
             }
         }
     }
