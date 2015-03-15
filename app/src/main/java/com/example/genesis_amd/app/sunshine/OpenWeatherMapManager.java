@@ -34,7 +34,7 @@ public class OpenWeatherMapManager
     private static final String OWM_MIN = "min";
     private static final String OWM_DESCRIPTION = "main";
 
-    private static final boolean ENABLE_VERBOSE_LOGGING = true;
+    private static final boolean ENABLE_VERBOSE_LOGGING = false;
 
     private static void log_verbose(String message)
     {
