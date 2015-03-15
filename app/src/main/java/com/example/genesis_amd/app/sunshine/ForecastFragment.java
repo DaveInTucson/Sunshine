@@ -77,23 +77,36 @@ public class ForecastFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
-    class FetchWeatherTask extends AsyncTask<String, Void, String>
+    class FetchWeatherTask extends AsyncTask<String, Void, String[]>
     {
         @Override
-        protected String doInBackground(String... locations)
+        protected String[] doInBackground(String... locations)
         {
             if (null == locations || locations.length == 0)
                 return null;
 
             try
             {
+                final int numDays = 7;
                 String location = locations[0];
-                String forecastURL = OpenWeatherMapManager.makeGetForecastUrl(location);
+                String forecastURL = OpenWeatherMapManager.makeGetForecastUrl(location, numDays);
                 Log.v(LOG_TAG, "Fetching forecast JSON");
                 String forecastJSON = Http.readDataFromUrl(forecastURL);
 
-                Log.d(LOG_TAG, "have response=" + forecastJSON);
-                return forecastJSON;
+                if (null != forecastJSON)
+                {
+                    log_verbose(LOG_TAG, "have response, parsing");
+                    try
+                    {
+                        String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, numDays);
+                        log_verbose("JSON parse succeeded");
+                        return forecasts;
+                    }
+                    catch (Exception e)
+                    {
+                        Log.e(LOG_TAG, "Failed to parse JSON: ", e);
+                    }
+                }
             }
             catch (IOException e)
             {
