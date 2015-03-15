@@ -77,8 +77,16 @@ public class ForecastFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
-    class FetchWeatherTask extends AsyncTask<String, Void, String[]>
+    static class FetchWeatherTask extends AsyncTask<String, Void, String[]>
     {
+        private static final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+        private static final boolean ENABLE_LOG_VERBOSE = false;
+
+        void log_verbose(String message)
+        {
+            if (ENABLE_LOG_VERBOSE) Log.v(LOG_TAG, message);
+        }
+        
         @Override
         protected String[] doInBackground(String... locations)
         {
@@ -90,12 +98,12 @@ public class ForecastFragment extends Fragment
                 final int numDays = 7;
                 String location = locations[0];
                 String forecastURL = OpenWeatherMapManager.makeGetForecastUrl(location, numDays);
-                Log.v(LOG_TAG, "Fetching forecast JSON");
+                log_verbose("Fetching forecast JSON");
                 String forecastJSON = Http.readDataFromUrl(forecastURL);
 
                 if (null != forecastJSON)
                 {
-                    log_verbose(LOG_TAG, "have response, parsing");
+                    log_verbose("have response, parsing");
                     try
                     {
                         String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, numDays);
