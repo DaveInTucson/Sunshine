@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.genesis_amd.app.sunshine.Http;
 import com.example.genesis_amd.app.sunshine.OpenWeatherMapManager;
@@ -58,6 +60,17 @@ public class ForecastFragment extends Fragment
                 forecasts);
         ListView forecastLV = (ListView)rootView.findViewById(R.id.listview_forecast);
         forecastLV.setAdapter(forecastAdapter);
+        forecastLV.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                TextView tv = (TextView) view;
+
+                Toast toast = Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
         m_forecastAdapter = forecastAdapter;
         return rootView;
     }
