@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -57,7 +58,7 @@ public class ForecastFragment extends Fragment
                 forecasts);
         ListView forecastLV = (ListView)rootView.findViewById(R.id.listview_forecast);
         forecastLV.setAdapter(forecastAdapter);
-
+        m_forecastAdapter = forecastAdapter;
         return rootView;
     }
 
@@ -72,18 +73,23 @@ public class ForecastFragment extends Fragment
         if (id == R.id.action_refresh)
         {
             Log.d(LOG_TAG, "action_refresh selected");
-            new FetchWeatherTask().execute("Tucson");
+            new FetchWeatherTask(m_forecastAdapter).execute("Tucson");
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    ArrayAdapter<String> m_forecastAdapter = null;
 
     static class FetchWeatherTask extends AsyncTask<String, Void, String[]>
     {
         private static final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
         private static final boolean ENABLE_LOG_VERBOSE = false;
 
-        void log_verbose(String message)
+        public FetchWeatherTask(ArrayAdapter<String> forecastAdapter)
+        { m_forecastAdapter = forecastAdapter; }
+
+        private void log_verbose(String message)
         {
             if (ENABLE_LOG_VERBOSE) Log.v(LOG_TAG, message);
         }
@@ -124,5 +130,15 @@ public class ForecastFragment extends Fragment
             log_verbose("reached return null");
             return null;
         }
+
+        @Override
+        protected void onPostExecute(String[] forecasts)
+        {
+            //super.onPostExecute(strings);
+            m_forecastAdapter.clear();
+            m_forecastAdapter.addAll(forecasts);
+        }
+
+        ArrayAdapter<String> m_forecastAdapter = null;
     }
 }
