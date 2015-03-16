@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 
 /**
  * Created by GENESIS-AMD on 3/15/2015.
+ *
+ * Some methods for dealing with OpenWeatherMap.org
  */
 public class OpenWeatherMapManager
 {
@@ -41,6 +43,7 @@ public class OpenWeatherMapManager
         if (ENABLE_VERBOSE_LOGGING) Log.v(LOG_TAG, message);
     }
 
+    /** Create the URL to geth the forecast JSON given a location and number of days */
     public static String makeGetForecastUrl(String location, int numDays)
     {
         Uri.Builder builder = Uri.parse(FORECAST_BASE_URL).buildUpon();
@@ -52,6 +55,7 @@ public class OpenWeatherMapManager
         log_verbose("Built URI " + uri.toString());
         return uri.toString();
     }
+
     /* The date/time conversion code is going to be moved outside the asynctask later,
      * so for convenience we're breaking it out into its own method now.
      */
@@ -148,4 +152,5 @@ public class OpenWeatherMapManager
             log_verbose("Forecast entry: " + s);
         }
         return resultStrs;
-    }}
+    }
+}

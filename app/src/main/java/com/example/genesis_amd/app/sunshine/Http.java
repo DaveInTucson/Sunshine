@@ -54,7 +54,8 @@ public class Http
             }
 
             return buffer.toString();
-        } finally
+        }
+        finally
         {
             if (null != reader)
                 reader.close();
@@ -71,7 +72,8 @@ public class Http
             connection = sendGetRequest(url);
             log_verbose("reading response");
             return readRequestResponse(connection);
-        } finally
+        }
+        finally
         {
             if (null != connection)
             {
