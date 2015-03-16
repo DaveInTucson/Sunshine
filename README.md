@@ -4,28 +4,28 @@ My version of Sunshine project for Udacity "Developing Android Apps" course
 https://www.udacity.com/course/ud853
 
 ##Lesson 1: Create Project Sunshine
-[x] Install Android Studio
-[x] Create Project Sunshine
-[x] Select Target SDK
-[x] Launch Sunshine, create AVD (Android Virtual Device)
-[x] Add ListItem XML
-[x] Add ListView to layout
-[x] Create some fake data
+- [x] Install Android Studio
+- [x] Create Project Sunshine
+- [x] Select Target SDK
+- [x] Launch Sunshine, create AVD (Android Virtual Device)
+- [x] Add ListItem XML
+- [x] Add ListView to layout
+- [x] Create some fake data
 
 ##Lesson 2: Connect Sunshine to the Cloud
-[x] Make HTTP request for forecast data
-[x] Logging with Logcat
-[x] Add AsyncTask, move HTTP request there
-[x] Add Refresh menu item
-[x] Executing AsyncTask from Refresh button
-[x] Adding permission to access Internet
-[x] HTTP request parameters
-[x] JSON parsing
-[x] Updatin the adapter
+- [x] Make HTTP request for forecast data
+- [x] Logging with Logcat
+- [x] Add AsyncTask, move HTTP request there
+- [x] Add Refresh menu item
+- [x] Executing AsyncTask from Refresh button
+- [x] Adding permission to access Internet
+- [x] HTTP request parameters
+- [x] JSON parsing
+- [x] Updatin the adapter
 
 ##Lesson 3: New Activities and Intents
-[x] Respond to a list item click, show a Toast notification
-[ ] Create Detail Activity
+- [x] Respond to a list item click, show a Toast notification
+- [ ] Create Detail Activity
 
 ##Lesson 4A: Activity Lifecycle and Data
 
