@@ -1,5 +1,6 @@
 package com.example.genesis_amd.app.sunshine;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.genesis_amd.app.sunshine.Http;
 import com.example.genesis_amd.app.sunshine.OpenWeatherMapManager;
+import com.example.genesis_amd.app.sunshine.DetailActivity;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,10 +68,8 @@ public class ForecastFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                TextView tv = (TextView) view;
-
-                Toast toast = Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_SHORT);
-                toast.show();
+                Intent raiseDetailView = new Intent(getActivity(), DetailActivity.class);
+                startActivity(raiseDetailView);
             }
         });
         m_forecastAdapter = forecastAdapter;
