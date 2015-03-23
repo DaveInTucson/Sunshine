@@ -45,10 +45,8 @@ public class ForecastFragment extends Fragment
         setHasOptionsMenu(true);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+    private ArrayAdapter<String> makeForecastAdapter()
+    {
         ArrayList<String> forecasts = new ArrayList<String>();
         forecasts.add("Today - Sunny - 88/63");
         forecasts.add("Tomorrow - Foggy - 70/46");
@@ -56,23 +54,43 @@ public class ForecastFragment extends Fragment
         forecasts.add("Thurs - Rainy - 61/51");
         forecasts.add("Fri - Foggy - 70/46");
         forecasts.add("Sat - Sunny - 76/68");
-        ArrayAdapter<String> forecastAdapter = new ArrayAdapter<String>(
+        return new ArrayAdapter<String>(
                 getActivity(),
                 R.layout.list_item_forecast,
                 R.id.list_item_forecast_textview,
                 forecasts);
-        ListView forecastLV = (ListView)rootView.findViewById(R.id.listview_forecast);
-        forecastLV.setAdapter(forecastAdapter);
-        forecastLV.setOnItemClickListener(new AdapterView.OnItemClickListener()
+    }
+
+    private ListView getForecastListView(View parentView)
+    {
+        return (ListView)parentView.findViewById(R.id.listview_forecast);
+    }
+
+    private void initializeForecastListView(ListView forecastListView)
+    {
+        ArrayAdapter<String> forecastAdapter = makeForecastAdapter();
+        m_forecastAdapter = forecastAdapter;
+
+        forecastListView.setAdapter(forecastAdapter);
+        forecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Intent raiseDetailView = new Intent(getActivity(), DetailActivity.class);
+                raiseDetailView.putExtra("Forecast", m_forecastAdapter.getItem(position));
                 startActivity(raiseDetailView);
             }
         });
-        m_forecastAdapter = forecastAdapter;
+
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        ListView forecastListView = getForecastListView(rootView);
+        initializeForecastListView(forecastListView);
         return rootView;
     }
 

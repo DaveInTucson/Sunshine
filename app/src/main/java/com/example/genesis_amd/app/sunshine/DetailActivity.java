@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity
@@ -69,6 +70,10 @@ public class DetailActivity extends ActionBarActivity
                                  Bundle savedInstanceState)
         {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            String forecast = getActivity().getIntent().getStringExtra("Forecast");
+
+            TextView forecastView = (TextView)rootView.findViewById(R.id.textViewForecast);
+            forecastView.setText(forecast);
             return rootView;
         }
     }
