@@ -126,7 +126,7 @@ public class ForecastFragment extends Fragment
                 log_verbose("have response, parsing");
                 try
                 {
-                    String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, numDays);
+                    String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON);
                     log_verbose("JSON parse succeeded");
                     return forecasts;
                 }

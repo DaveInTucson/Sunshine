@@ -97,7 +97,7 @@ public class OpenWeatherMapManager
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    public static String[] getWeatherDataFromJson(String forecastJsonStr, int numDays)
+    public static String[] getWeatherDataFromJson(String forecastJsonStr)
             throws JSONException
     {
         JSONObject forecastJson = new JSONObject(forecastJsonStr);
@@ -115,7 +115,7 @@ public class OpenWeatherMapManager
         // now we work exclusively in UTC
         Time dayTime = new Time();
 
-        String[] resultStrs = new String[numDays];
+        String[] resultStrs = new String[weatherArray.length()];
         for(int i = 0; i < weatherArray.length(); i++) {
             // For now, using the format "Day, description, hi/low"
             String day;
