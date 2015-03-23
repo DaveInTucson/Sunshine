@@ -25,7 +25,10 @@ https://www.udacity.com/course/ud853
 
 ##Lesson 3: New Activities and Intents
 - [x] Respond to a list item click, show a Toast notification
-- [ ] Create Detail Activity
+- [x] Create DetailActivity
+- [x] Display content in DetailActivity
+- [ ] Create SettingsActivity
+- [ ] Launch SettingsActivity
 
 ##Lesson 4A: Activity Lifecycle and Data
 
