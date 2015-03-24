@@ -33,6 +33,7 @@ public class ForecastFragment extends Fragment
 {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+    private final String BUNDLE_FORECAST_KEY = "bundle.forecast";
 
     public ForecastFragment()
     {
@@ -66,7 +67,7 @@ public class ForecastFragment extends Fragment
         return (ListView)parentView.findViewById(R.id.listview_forecast);
     }
 
-    private void initializeForecastListView(ListView forecastListView)
+    private void initializeForecastListView(ListView forecastListView, Bundle savedInstanceState)
     {
         ArrayAdapter<String> forecastAdapter = makeForecastAdapter();
         m_forecastAdapter = forecastAdapter;
@@ -85,12 +86,15 @@ public class ForecastFragment extends Fragment
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState)
+    {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         ListView forecastListView = getForecastListView(rootView);
-        initializeForecastListView(forecastListView);
+        initializeForecastListView(forecastListView, savedInstanceState);
         return rootView;
     }
 
@@ -112,6 +116,8 @@ public class ForecastFragment extends Fragment
     }
 
     ArrayAdapter<String> m_forecastAdapter = null;
+
+    /* =============================================================================== */
 
     static class FetchWeatherTask extends AsyncTask<String, Void, String[]>
     {
