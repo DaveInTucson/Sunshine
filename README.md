@@ -27,7 +27,7 @@ https://www.udacity.com/course/ud853
 - [x] Respond to a list item click, show a Toast notification
 - [x] Create DetailActivity
 - [x] Display content in DetailActivity
-- [ ] Create SettingsActivity
+- [x] Create SettingsActivity
 - [ ] Launch SettingsActivity
 
 ##Lesson 4A: Activity Lifecycle and Data
