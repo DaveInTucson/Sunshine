@@ -112,6 +112,7 @@ public class ForecastFragment extends Fragment
             new FetchWeatherTask(m_forecastAdapter).execute("Tucson");
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -174,7 +175,8 @@ public class ForecastFragment extends Fragment
         {
             //super.onPostExecute(strings);
             m_forecastAdapter.clear();
-            m_forecastAdapter.addAll(forecasts);
+            if (forecasts.length > 0)
+                m_forecastAdapter.addAll(forecasts);
         }
 
         ArrayAdapter<String> m_forecastAdapter = null;
