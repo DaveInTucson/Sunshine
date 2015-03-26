@@ -1,9 +1,12 @@
 package com.example.genesis_amd.app.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +47,8 @@ public class ForecastFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_general, false);
     }
 
     private ArrayAdapter<String> makeForecastAdapter()
@@ -108,8 +113,11 @@ public class ForecastFragment extends Fragment
         int id = item.getItemId();
         if (id == R.id.action_refresh)
         {
-            Log.d(LOG_TAG, "action_refresh selected");
-            new FetchWeatherTask(m_forecastAdapter).execute("Tucson");
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String location = sp.getString("location", "Tucson");
+
+            Log.d(LOG_TAG, "action_refresh selected, location=" + location);
+            new FetchWeatherTask(m_forecastAdapter).execute(location);
             return true;
         }
 
