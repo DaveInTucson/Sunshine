@@ -8,4 +8,8 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
+    <item android:id="@+id/action_view_location_on_map"
+          android:title="@string/action_view_location_on_map"
+          app:showAsAction="never"
+        />
 </menu>
