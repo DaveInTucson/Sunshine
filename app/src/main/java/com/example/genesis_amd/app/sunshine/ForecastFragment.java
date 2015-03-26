@@ -114,7 +114,9 @@ public class ForecastFragment extends Fragment
         if (id == R.id.action_refresh)
         {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String location = sp.getString("location", "Tucson");
+            String locationKey = getString(R.string.pref_location_key);
+            String locationDefault = getString(R.string.pref_location_default);
+            String location = sp.getString(locationKey, locationDefault);
 
             Log.d(LOG_TAG, "action_refresh selected, location=" + location);
             new FetchWeatherTask(m_forecastAdapter).execute(location);
