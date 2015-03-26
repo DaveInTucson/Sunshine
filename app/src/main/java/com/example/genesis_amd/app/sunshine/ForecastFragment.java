@@ -54,12 +54,6 @@ public class ForecastFragment extends Fragment
     private ArrayAdapter<String> makeForecastAdapter()
     {
         ArrayList<String> forecasts = new ArrayList<String>();
-        forecasts.add("Today - Sunny - 88/63");
-        forecasts.add("Tomorrow - Foggy - 70/46");
-        forecasts.add("Weds - Cloudy - 72/63");
-        forecasts.add("Thurs - Rainy - 61/51");
-        forecasts.add("Fri - Foggy - 70/46");
-        forecasts.add("Sat - Sunny - 76/68");
         return new ArrayAdapter<String>(
                 getActivity(),
                 R.layout.list_item_forecast,
@@ -109,17 +103,29 @@ public class ForecastFragment extends Fragment
     }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        updateForecastDisplay();
+    }
+
+    private void updateForecastDisplay()
+    {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String locationKey = getString(R.string.pref_location_key);
+        String locationDefault = getString(R.string.pref_location_default);
+        String location = sp.getString(locationKey, locationDefault);
+
+        new FetchWeatherTask(m_forecastAdapter).execute(location);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh)
         {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String locationKey = getString(R.string.pref_location_key);
-            String locationDefault = getString(R.string.pref_location_default);
-            String location = sp.getString(locationKey, locationDefault);
-
-            Log.d(LOG_TAG, "action_refresh selected, location=" + location);
-            new FetchWeatherTask(m_forecastAdapter).execute(location);
+            Log.d(LOG_TAG, "action_refresh selected");
+            updateForecastDisplay();
             return true;
         }
 
