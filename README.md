@@ -29,6 +29,12 @@ https://www.udacity.com/course/ud853
 - [x] Display content in DetailActivity
 - [x] Create SettingsActivity
 - [x] Launch SettingsActivity
+- [x] Create pref_general.xml, add entry for location setting
+- [x] Use shared preferences for location when requesting forecast data
+- [ ] Temperature units preference setting
+- [ ] Add map location intent
+- [ ] Share intent
+- [ ] Intent filters
 
 ##Lesson 4A: Activity Lifecycle and Data
 
