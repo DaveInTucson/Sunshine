@@ -33,7 +33,7 @@ https://www.udacity.com/course/ud853
 - [x] Use shared preferences for location when requesting forecast data
 - [x] Fetch forecast data in onStart method
 - [x] Temperature units preference setting
-- [ ] Add map location intent
+- [x] Use implicit intent to view map of configured location
 - [ ] Share intent
 - [ ] Intent filters
 

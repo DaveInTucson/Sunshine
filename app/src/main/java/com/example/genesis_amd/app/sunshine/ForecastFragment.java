@@ -131,6 +131,20 @@ public class ForecastFragment extends Fragment
             updateForecastDisplay();
             return true;
         }
+        if (id == R.id.action_view_location_on_map)
+        {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String locationKey = getString(R.string.pref_location_key);
+            String locationDefault = getString(R.string.pref_location_default);
+            String location = sp.getString(locationKey, locationDefault);
+
+            Log.d(LOG_TAG, "action_view_location_on_map selected");
+            String mapUri = "geo:0,0?q=" + location;
+            Intent viewLocationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mapUri));
+            if (null != viewLocationIntent.resolveActivity(getActivity().getPackageManager()))
+                getActivity().startActivity(viewLocationIntent);
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
