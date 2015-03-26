@@ -7,4 +7,13 @@
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
         android:singleLine="true" />
+
+    <ListPreference
+        android:key="@string/pref_temp_units_key"
+        android:title="@string/pref_temp_units_title"
+        android:defaultValue="@string/pref_temp_units_centigrade"
+        android:entries="@array/pref_temp_units_options"
+        android:entryValues="@array/pref_temp_units_values"/>
+
+
 </PreferenceScreen>

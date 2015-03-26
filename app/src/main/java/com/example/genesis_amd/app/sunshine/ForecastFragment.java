@@ -116,7 +116,10 @@ public class ForecastFragment extends Fragment
         String locationDefault = getString(R.string.pref_location_default);
         String location = sp.getString(locationKey, locationDefault);
 
-        new FetchWeatherTask(m_forecastAdapter).execute(location);
+        String tempUnitKey = getString(R.string.pref_temp_units_key);
+        String tempUnitDefault = getString(R.string.pref_temp_units_centigrade);
+        String tempUnits = sp.getString(tempUnitKey, tempUnitDefault);
+        new FetchWeatherTask(m_forecastAdapter).execute(location, tempUnits);
     }
 
     @Override
@@ -150,15 +153,17 @@ public class ForecastFragment extends Fragment
         }
 
         @Override
-        protected String[] doInBackground(String... locations)
+        protected String[] doInBackground(String... parms)
         {
-            if (null == locations || locations.length == 0)
+            if (null == parms || parms.length < 2)
                 return null;
 
+            String location = parms[0];
+            String tempUnits = parms[1];
+            if (null == tempUnits || !tempUnits.equals("F")) tempUnits = "C";
             try
             {
                 final int numDays = 7;
-                String location = locations[0];
                 String getForecastURL = OpenWeatherMapManager.makeGetForecastUrl(location, numDays);
                 log_verbose("Fetching forecast JSON");
                 String forecastJSON = Http.readDataFromUrl(getForecastURL);
@@ -168,7 +173,7 @@ public class ForecastFragment extends Fragment
                 log_verbose("have response, parsing");
                 try
                 {
-                    String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON);
+                    String[] forecasts = OpenWeatherMapManager.getWeatherDataFromJson(forecastJSON, tempUnits);
                     log_verbose("JSON parse succeeded");
                     return forecasts;
                 }

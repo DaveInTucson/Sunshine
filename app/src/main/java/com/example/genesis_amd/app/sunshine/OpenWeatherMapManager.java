@@ -90,6 +90,11 @@ public class OpenWeatherMapManager
         return Time.getJulianDay(System.currentTimeMillis(), dayTime.gmtoff);
     }
 
+    private static double centigrade_to_fahrenheit(double temp_in_centigrade)
+    {
+        return temp_in_centigrade * 1.8 + 32;
+    }
+
     /**
      * Take the String representing the complete forecast in JSON Format and
      * pull out the data we need to construct the Strings needed for the wireframes.
@@ -97,7 +102,7 @@ public class OpenWeatherMapManager
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    public static String[] getWeatherDataFromJson(String forecastJsonStr)
+    public static String[] getWeatherDataFromJson(String forecastJsonStr, String tempUnit)
             throws JSONException
     {
         JSONObject forecastJson = new JSONObject(forecastJsonStr);
@@ -142,6 +147,11 @@ public class OpenWeatherMapManager
             JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
             double high = temperatureObject.getDouble(OWM_MAX);
             double low = temperatureObject.getDouble(OWM_MIN);
+            if (tempUnit.equals("F"))
+            {
+                high = centigrade_to_fahrenheit(high);
+                low = centigrade_to_fahrenheit(low);
+            }
 
             highAndLow = formatHighLows(high, low);
             resultStrs[i] = day + " - " + description + " - " + highAndLow;

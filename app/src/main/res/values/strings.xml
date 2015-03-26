@@ -10,4 +10,17 @@
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key" translatable="false">location</string>
     <string name="pref_location_default" translatable="false">94043</string>
+
+    <string name="pref_temp_units_key" translatable="false">temp_units</string>
+    <string name="pref_temp_units_title">Temperature Units</string>
+
+    <string name="pref_temp_units_centigrade">Centigrade</string>
+    <string-array name="pref_temp_units_options">
+        <item name="C">Centigrade</item>
+        <item name="F">Fahrenheit</item>
+    </string-array>
+    <string-array name="pref_temp_units_values">
+        <item>C</item>
+        <item>F</item>
+    </string-array>
 </resources>
