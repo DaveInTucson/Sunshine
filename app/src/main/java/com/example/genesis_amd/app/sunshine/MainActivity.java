@@ -1,5 +1,6 @@
 package com.example.genesis_amd.app.sunshine;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,15 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
 public class MainActivity extends ActionBarActivity {
+
+    private static String LOG_TAG = MainActivity.class.getSimpleName();
+
+    private static boolean ENABLE_LOG_VERBOSE = true;
+
+    private static void log_verbose(String message)
+    {
+        if (ENABLE_LOG_VERBOSE) Log.v(LOG_TAG, message);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,9 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            log_verbose("action_settings selected");
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
