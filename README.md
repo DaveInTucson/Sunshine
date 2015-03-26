@@ -31,6 +31,7 @@ https://www.udacity.com/course/ud853
 - [x] Launch SettingsActivity
 - [x] Create pref_general.xml, add entry for location setting
 - [x] Use shared preferences for location when requesting forecast data
+- [x] Fetch forecast data in onStart method
 - [ ] Temperature units preference setting
 - [ ] Add map location intent
 - [ ] Share intent
