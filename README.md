@@ -28,7 +28,7 @@ https://www.udacity.com/course/ud853
 - [x] Create DetailActivity
 - [x] Display content in DetailActivity
 - [x] Create SettingsActivity
-- [ ] Launch SettingsActivity
+- [x] Launch SettingsActivity
 
 ##Lesson 4A: Activity Lifecycle and Data
 
