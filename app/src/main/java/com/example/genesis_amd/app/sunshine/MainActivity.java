@@ -5,24 +5,16 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private static boolean ENABLE_LOG_VERBOSE = true;
+    private static final boolean ENABLE_LOG_VERBOSE = true;
 
     private static void log_verbose(String message)
     {
@@ -69,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
             String locationDefault = getString(R.string.pref_location_default);
             String location = sp.getString(locationKey, locationDefault);
 
-            Log.d(LOG_TAG, "action_view_location_on_map selected");
+            log_verbose("action_view_location_on_map selected");
             String mapUri = "geo:0,0?q=" + location;
             Intent viewLocationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mapUri));
             if (null != viewLocationIntent.resolveActivity(getPackageManager()))

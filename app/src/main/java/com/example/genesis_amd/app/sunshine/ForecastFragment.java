@@ -2,10 +2,8 @@ package com.example.genesis_amd.app.sunshine;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,15 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.genesis_amd.app.sunshine.Http;
-import com.example.genesis_amd.app.sunshine.OpenWeatherMapManager;
-import com.example.genesis_amd.app.sunshine.DetailActivity;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -135,7 +126,7 @@ public class ForecastFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
-    ArrayAdapter<String> m_forecastAdapter = null;
+    private ArrayAdapter<String> m_forecastAdapter = null;
 
     /* =============================================================================== */
 

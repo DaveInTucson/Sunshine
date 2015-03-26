@@ -2,7 +2,6 @@ package com.example.genesis_amd.app.sunshine;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,15 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity
 {
-    private static String LOG_TAG = DetailActivity.class.getSimpleName();
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
 
-    private static boolean ENABLE_LOG_VERBOSE = true;
+    private static final boolean ENABLE_LOG_VERBOSE = true;
 
     private static void log_verbose(String message)
     { if (ENABLE_LOG_VERBOSE) Log.v(LOG_TAG, message); }

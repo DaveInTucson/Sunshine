@@ -8,8 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 
 /**
@@ -76,8 +74,7 @@ public class OpenWeatherMapManager
         long roundedHigh = Math.round(high);
         long roundedLow = Math.round(low);
 
-        String highLowStr = roundedHigh + "/" + roundedLow;
-        return highLowStr;
+        return roundedHigh + "/" + roundedLow;
     }
 
     /** Get the current Julian Day (http://en.wikipedia.org/wiki/Julian_day) */
