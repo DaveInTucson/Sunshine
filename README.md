@@ -21,7 +21,7 @@ https://www.udacity.com/course/ud853
 - [x] Adding permission to access Internet
 - [x] HTTP request parameters
 - [x] JSON parsing
-- [x] Updatin the adapter
+- [x] Updating the adapter
 
 ##Lesson 3: New Activities and Intents
 - [x] Respond to a list item click, show a Toast notification
