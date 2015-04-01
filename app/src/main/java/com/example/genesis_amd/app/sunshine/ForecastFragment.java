@@ -187,7 +187,7 @@ public class ForecastFragment extends Fragment
         {
             //super.onPostExecute(strings);
             m_forecastAdapter.clear();
-            if (forecasts.length > 0)
+            if (null != forecasts && forecasts.length > 0)
                 m_forecastAdapter.addAll(forecasts);
         }
 
