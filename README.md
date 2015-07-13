@@ -34,8 +34,7 @@ https://www.udacity.com/course/ud853
 - [x] Fetch forecast data in onStart method
 - [x] Temperature units preference setting
 - [x] Use implicit intent to view map of configured location
-- [ ] Share intent
-- [ ] Intent filters
+- [x] Share intent
 
 ##Lesson 4A: Activity Lifecycle and Data
 
